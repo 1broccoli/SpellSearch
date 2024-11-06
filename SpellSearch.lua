@@ -26,7 +26,8 @@ frame:SetBackdrop({
     insets = { left = 4, right = 4, top = 4, bottom = 4 },
 })
 frame:SetBackdropColor(0, 0, 0, 1)
-
+-- Hide the frame on startup
+frame:Hide()
 -- Title Text with Rainbow Effect
 local titleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
 titleText:SetPoint("TOP", 0, -10)
@@ -44,7 +45,7 @@ local colorIndex = 1
 local function UpdateTitleColor()
     titleText:SetTextColor(unpack(colors[colorIndex]))
     colorIndex = colorIndex % #colors + 1
-    C_Timer.After(1, UpdateTitleColor)
+    C_Timer.After(1.3, UpdateTitleColor) -- Timer for Title color Change
 end
 UpdateTitleColor()
 
@@ -112,7 +113,7 @@ local function CreateResultText(match, parent, index)
         mouseX = mouseX / scale
         mouseY = mouseY / scale
 
-        -- Calculate frame bounds
+        -- Calculate frame bounds for tooltip
         local frameLeft = frameX - frame:GetWidth() / 2
         local frameRight = frameX + frame:GetWidth() / 2
         local frameTop = frameY + frame:GetHeight() / 4
@@ -181,11 +182,22 @@ function SpellSearch_OnEnterPressed(self)
         resultsChild:Hide() -- No matches found
     end
 end
-
--- Register the frame for events
-RegEvent(frame, "ADDON_LOADED", function(self)
-    frame:Show()
-end)
+-- Slash command to toggle the frame
+SLASH_SPELLSEARCH1 = "/spellsearch"
+SlashCmdList["SPELLSEARCH"] = function()
+    frame:SetShown(not frame:IsShown())
+end
+-- Slash command to toggle frame visibility
+SLASH_SPELLSEARCH1 = "/Spells"
+SlashCmdList["SpellSearch"] = function()
+    if frame:IsShown() then
+        frame:Hide()
+        SpellSearch.isVisible = false
+    else
+        frame:Show()
+        SpellSearch.isVisible = true
+    end
+end
 
 -- Initialize tooltip frame
 tooltipFrame:Hide()

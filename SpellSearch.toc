@@ -3,6 +3,6 @@
 ## Notes: A simple addon to search for spells and display their IDs and icons.
 ## Author: Broccoli / Pegga
 ## Website: https://github.com/1broccoli
-## Version: 1.0.0
+## Version: 1.1.0
 
 SpellSearch.lua
