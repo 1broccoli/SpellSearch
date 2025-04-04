@@ -1,5 +1,7 @@
 # SpellSearch
 
+depreciated, check out lookitup https://www.curseforge.com/wow/addons/lookitup
+
 Have you ever had the need to look something up but have to search it online? Tired of trying to find specifically and waste time doing it? 
 No longer are you dependant on websites to find it! Quickly search those results in game!
 
